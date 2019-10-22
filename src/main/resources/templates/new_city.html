@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th = "http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Managment system - new</title>
+</head>
+<body>
+<a href="new">Create new</a>
+<br>
+<form action="#" th:action="@{/save}" th:object="${city}" method="post">
+    <p>Name: <input type="text" th:field="*{name}" /></p>
+    <p>Population: <input type="number" th:field="*{population}" /></p>
+    <p>
+        <select th:field="*{country}">
+            <option th:each="country : ${countryList}"
+                    th:value="${country.code}"
+                    th:text="${country.name}">
+            </option>
+        </select>
+    </p>
+    <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+</form>
+</body>
+</html>

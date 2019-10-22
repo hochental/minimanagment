@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th = "http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Managment system</title>
+</head>
+<body>
+    <a href="new">Create new</a>
+    <a th:action="@{/sort}">Create new</a>
+    <br>
+<table border="1">
+        <tbody>
+        <tr th:each="city: ${listCity}">
+            <td th:text="${city.id}">Test</td>
+            <td>
+                <a th:text="${city.country.name}" th:href="@{'/country_info/'+${city.country.code}}"> </a>
+            </td>
+            <td th:text="${city.name}">Test</td>
+            <td th:text="${city.population}">Test</td>
+            <td>
+                <a th:href="@{'/delete/'+ ${city.id}}"> delete</a>
+                <a th:href="@{'/edit/'+ ${city.id}}"> edit</a>
+            </td>
+        </tr>
+        </tbody>
+</table>
+</body>
+</html>

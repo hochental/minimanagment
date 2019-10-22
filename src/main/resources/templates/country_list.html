@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th = "http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Managment system - country list</title>
+</head>
+<body>
+<table border="1">
+    <tbody>
+    <tr th:each="country: ${countrieList}">
+        <td th:text="${country.code}">name</td>
+        <td th:text="${country.name}">population</td>
+        <td th:text="${country.population}">population</td>
+    </tr>
+    </tbody>
+</table>
+    </body>
+</html>
