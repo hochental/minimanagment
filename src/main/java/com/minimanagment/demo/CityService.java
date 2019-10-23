@@ -1,8 +1,10 @@
 package com.minimanagment.demo;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.awt.print.Pageable;
 import java.util.List;
 import java.util.Optional;
 
@@ -13,6 +15,10 @@ public class CityService {
 
     public List<City> listAll(){
         return repo.findAll();
+    }
+
+    public List<City> listAllSorted(){
+        return repo.findAll(Sort.by("name"));
     }
 
     public void save(City city){
@@ -27,8 +33,8 @@ public class CityService {
         return repo.findById(id);
     }
 
-    public void sort(){
-        //SORTOWANIE
+    public List<City> sort(Iterable<Long> iterble){
+        return repo.findAllById(iterble);
     }
 
 }

@@ -45,6 +45,7 @@ public class AppController {
     @RequestMapping(value = "/save/{id}", method = RequestMethod.POST)
     public String saveEditCity(@ModelAttribute("city") City city, @PathVariable(name="id") Long id){
         city.setId(id);
+        city.setCountry(city.getCountry());
         service.save(city);
         return "redirect:/";
     }
@@ -58,7 +59,7 @@ public class AppController {
 
     @RequestMapping(value = "/sort")
     public String sortCity(){
-        
+        service.listAllSorted();
         return "redirect:/";
     }
 
