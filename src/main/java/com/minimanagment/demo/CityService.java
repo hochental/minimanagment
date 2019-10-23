@@ -18,6 +18,10 @@ public class CityService {
         return repo.findAll();
     }
 
+    public City getCity(Long id){
+        return repo.getOne(id);
+    }
+
     public void save(City city){
         repo.save(city);
     }
