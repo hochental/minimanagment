@@ -1,6 +1,10 @@
 package com.minimanagment.demo;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.SortDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -8,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,9 +25,9 @@ public class AppController {
     private CountryService cservice;
 
     @RequestMapping("/")
-    public String viewHomePage(Model model){
+    public String viewHomePage(Model model, @SortDefault("name") Pageable pageable){
         List<City> cityList = service.listAll();
-        model.addAttribute("listCity", cityList);
+        model.addAttribute("page", service.findAll(pageable));
         return "index";
     }
 
@@ -57,12 +62,6 @@ public class AppController {
         return "redirect:/";
     }
 
-    @RequestMapping(value = "/sort")
-    public String sortCity(){
-        service.listAllSorted();
-        return "redirect:/";
-    }
-
     @RequestMapping(value = "/delete/{id}")
     public String deleteCity(@PathVariable(name="id") Long id){
         service.delete(id);
@@ -75,7 +74,6 @@ public class AppController {
         List<Country> countryList=cservice.listAll();
         model.addAttribute("countryList", countryList);
         model.addAttribute("city", city);
-
         return "edit";
     }
 
